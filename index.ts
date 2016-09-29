@@ -16,7 +16,7 @@ var destFile = args._[1];
 var $ = cheerio.load(fs.readFileSync(sourceFile));
 
 
-var rows = $('div[ng-repeat="table in tables"]').filter(function (i, div) {
+var rows = $('div[ng-repeat="table in tables  track by $index"]').filter(function (i, div) {
     return $('h4[ng-if="table.title"]', div).length > 0;
 }).first().find('table tr').slice(1).toArray().map(function (row) {
     return $('td', row).toArray().map(function (col) {
